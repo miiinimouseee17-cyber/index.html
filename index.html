@@ -254,9 +254,147 @@ mission ab shuru hone wali hai.
 <br><br>
 Prepare yourself...`;
 
-    },3000);
+<script>
+setTimeout(function(){
+
+document.getElementById("mission").innerHTML = `
+
+<div style="
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:black;
+color:red;
+font-family:monospace;
+text-align:center;
+animation:flicker 1s infinite;
+">
+
+<h1 style="
+font-size:70px;
+text-shadow:0 0 20px red;
+">
+⚠ PORTAL OPENED ⚠
+</h1>
+
+<h2>
+WELCOME TO THE UPSIDE DOWN
+</h2>
+
+<br>
+
+<h3>
+AGENT BLACK BABU
+</h3>
+
+<p>
+MISSION 1 UNLOCKED
+</p>
+
+<br>
+
+<button
+onclick="minecraftMission()"
+style="
+padding:20px;
+font-size:20px;
+background:black;
+color:red;
+border:2px solid red;
+cursor:pointer;
+">
+START MISSION
+</button>
+
+</div>
+
+`;
+
+},7000);
+
+function minecraftMission(){
+
+document.body.innerHTML=`
+
+<div style="
+background:black;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:#00ff00;
+font-family:monospace;
+text-align:center;
+">
+
+<h1>
+⛏ MINECRAFT MISSION
+</h1>
+
+<br>
+
+<h2>
+CREEPER DETECTED
+</h2>
+
+<br>
+
+<p>
+Find the secret code:
+</p>
+
+<h1>
+13
+</h1>
+
+<br>
+
+<input
+id="answer"
+placeholder="Enter Code"
+style="
+padding:15px;
+font-size:20px;
+">
+
+<br><br>
+
+<button onclick="checkCode()">
+SUBMIT
+</button>
+
+</div>
+
+`;
 
 }
+
+function checkCode(){
+
+let a=
+document.getElementById(
+"answer"
+).value;
+
+if(a=="13"){
+
+alert(
+"MISSION COMPLETED!"
+);
+
+}else{
+
+alert(
+"TRY AGAIN AGENT!"
+);
+
+}
+
+}
+</script>
 </script>
 
 </body>
