@@ -3,396 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE SHIVANSH CHRONICLES | BLACK BABU</title>
+
+<title>THE SHIVANSH CHRONICLES</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    background:#000;
-    color:#ff0000;
-    font-family:'Share Tech Mono', monospace;
-    overflow:hidden;
-    height:100vh;
-}
-
-/* Background flicker */
-body::before{
-    content:'';
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle,
-    rgba(255,0,0,.08),
-    #000);
-    animation:flicker .15s infinite;
+background:#000;
+color:#ff3c00;
+font-family:'Share Tech Mono',monospace;
+overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
 .container{
-    position:relative;
-    z-index:10;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
+padding:20px;
 }
 
-.title{
-    font-family:'Creepster', cursive;
-    font-size:70px;
-    color:#ff0000;
-    text-shadow:
-        0 0 10px red,
-        0 0 30px red,
-        0 0 60px red;
-    animation:pulse 2s infinite;
-    text-align:center;
+h1{
+font-size:60px;
+font-family:'Creepster',cursive;
+text-shadow:0 0 20px red;
+animation:flicker 2s infinite;
 }
 
-.subtitle{
-    color:white;
-    letter-spacing:5px;
-    margin:20px;
+h2{
+margin-top:20px;
+font-size:25px;
 }
 
-.terminal{
-    width:750px;
-    max-width:95%;
-    min-height:320px;
-    border:2px solid red;
-    padding:30px;
-    background:rgba(0,0,0,.85);
-    box-shadow:0 0 30px red;
-}
-
-.terminal p{
-    margin:15px 0;
-    font-size:22px;
+p{
+margin-top:20px;
+font-size:18px;
+line-height:30px;
 }
 
 button{
-    margin-top:40px;
-    padding:18px 45px;
-    background:black;
-    color:red;
-    border:2px solid red;
-    font-size:20px;
-    cursor:pointer;
-    transition:.3s;
+margin-top:30px;
+padding:15px 30px;
+background:black;
+border:2px solid red;
+color:red;
+font-size:20px;
+cursor:pointer;
+transition:0.3s;
 }
 
 button:hover{
-    background:red;
-    color:black;
+background:red;
+color:black;
 }
 
-#mission{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:black;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    z-index:100;
-}
-
-#mission h1{
-    font-size:60px;
-    color:red;
-    text-shadow:0 0 20px red;
-}
-
-#mission h2{
-    margin:20px;
-}
-
-.loader{
-    width:100px;
-    height:100px;
-    border:5px solid #300;
-    border-top:5px solid red;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-    margin:30px;
-}
-
-@keyframes spin{
-    100%{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes pulse{
-    50%{
-        transform:scale(1.05);
-    }
+input{
+padding:15px;
+font-size:20px;
+background:black;
+border:2px solid red;
+color:white;
+margin-top:20px;
 }
 
 @keyframes flicker{
-    50%{
-        opacity:.85;
-    }
+0%{opacity:1}
+50%{opacity:0.5}
+100%{opacity:1}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container" id="screen">
 
-    <h1 class="title">
-        THE SHIVANSH CHRONICLES
-    </h1>
+<h1>AGENT BLACK BABU</h1>
 
-    <div class="subtitle">
-        BLACK BABU PROTOCOL
-    </div>
+<h2>MISSION ACCEPTED</h2>
 
-    <div class="terminal">
-        <p id="l1"></p>
-        <p id="l2"></p>
-        <p id="l3"></p>
-        <p id="l4"></p>
-        <p id="l5"></p>
-        <p id="l6"></p>
-        <p id="l7"></p>
-        <p id="l8"></p>
-    </div>
+<p>
+Aaj se 13 saal pehle,<br>
+ek legendary gamer ka janam hua tha.<br><br>
 
-    <button onclick="startMission()">
-        ENTER THE UPSIDE DOWN
-    </button>
+Codename: <b>BLACK BABU</b><br><br>
 
-</div>
+Minecraft, Brookhaven aur BMW M4 mission
+ab shuru hone wala hai.
+</p>
 
-<div id="mission">
-
-    <h1>AGENT BLACK BABU</h1>
-
-    <h2>MISSION ACCEPTED</h2>
-
-    <h3>LEVEL 13 ACTIVATING...</h3>
-
-    <div class="loader"></div>
-
-    <p id="story"></p>
+<button onclick="portal()">
+ENTER THE UPSIDE DOWN
+</button>
 
 </div>
 
 <script>
-const lines = [
 
-"SEARCHING DATABASE...",
-"",
-"SUBJECT FOUND",
-"",
-"NAME : SHIVANSH",
-"CODENAME : BLACK BABU",
-"DOB : 13 JULY 2013",
-"WARNING : PORTAL DETECTED"
+function portal(){
 
-];
+document.getElementById("screen").innerHTML=`
 
-let i = 0;
+<h1>⚠ PORTAL OPENED ⚠</h1>
 
-function typeText(){
-
-    if(i < lines.length){
-
-        document.getElementById(
-            "l"+(i+1)
-        ).innerHTML = "> " + lines[i];
-
-        i++;
-
-        setTimeout(
-            typeText,
-            1000
-        );
-    }
-}
-
-typeText();
-
-function startMission(){
-
-    document.querySelector(
-        ".container"
-    ).style.display="none";
-
-    document.getElementById(
-        "mission"
-    ).style.display="flex";
-
-    setTimeout(function(){
-
-        document.getElementById(
-            "story"
-        ).innerHTML =
-
-`⚠️ ATTENTION AGENT BLACK BABU ⚠️
-<br><br>
-Aaj se 13 saal pehle,
-ek legendary gamer ka janam hua tha.
-<br><br>
-Codename:
-BLACK BABU.
-<br><br>
-Tumhari Minecraft,
-Brookhaven aur BMW M4
-mission ab shuru hone wali hai.
-<br><br>
-Prepare yourself...`;
-
-setTimeout(function(){
-
-document.getElementById("mission").innerHTML = `
-
-<div style="
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:black;
-color:red;
-font-family:monospace;
-text-align:center;
-animation:flicker 1s infinite;
-">
-
-<h1 style="
-font-size:70px;
-text-shadow:0 0 20px red;
-">
-⚠ PORTAL OPENED ⚠
-</h1>
-
-<h2>
-WELCOME TO THE UPSIDE DOWN
-</h2>
-
-<br>
-
-<h3>
-AGENT BLACK BABU
-</h3>
+<h2>WELCOME TO THE UPSIDE DOWN</h2>
 
 <p>
-MISSION 1 UNLOCKED
+Happy Birthday Shivansh!<br><br>
+
+Age: 13<br>
+Status: Legendary Gamer<br>
+Favorite Vehicle: BMW M4<br>
+Favorite Games: Minecraft + Roblox
 </p>
 
-<br>
-
-<button
-onclick="minecraftMission()"
-style="
-padding:20px;
-font-size:20px;
-background:black;
-color:red;
-border:2px solid red;
-cursor:pointer;
-">
+<button onclick="minecraft()">
 START MISSION
 </button>
 
-</div>
-
 `;
 
-},7000);
+}
 
-function minecraftMission(){
+function minecraft(){
 
-document.body.innerHTML=`
+document.getElementById("screen").innerHTML=`
 
-<div style="
-background:black;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-color:#00ff00;
-font-family:monospace;
-text-align:center;
-">
+<h1>⛏ MINECRAFT MISSION</h1>
 
-<h1>
-⛏ MINECRAFT MISSION
-</h1>
-
-<br>
-
-<h2>
-CREEPER DETECTED
-</h2>
-
-<br>
+<h2>CREEPER DETECTED</h2>
 
 <p>
-Find the secret code:
+Secret code enter karo:<br><br>
+Hint: Tumhari age kya hui?
 </p>
 
-<h1>
-13
-</h1>
+<input id="ans">
 
 <br>
 
-<input
-id="answer"
-placeholder="Enter Code"
-style="
-padding:15px;
-font-size:20px;
-">
-
-<br><br>
-
-<button onclick="checkCode()">
+<button onclick="check()">
 SUBMIT
 </button>
 
-</div>
-
 `;
 
 }
 
-function checkCode(){
+function check(){
 
-let a=
-document.getElementById(
-"answer"
-).value;
+let x=document.getElementById("ans").value;
 
-if(a=="13"){
+if(x=="13"){
 
-alert(
-"MISSION COMPLETED!"
-);
+document.getElementById("screen").innerHTML=`
 
-}else{
+<h1>🎉 MISSION COMPLETED 🎉</h1>
 
-alert(
-"TRY AGAIN AGENT!"
-);
+<h2>HAPPY 13TH BIRTHDAY SHIVANSH</h2>
+
+<p>
+From the entire family ❤️<br><br>
+
+Tum sirf hamare bhai nahi ho,<br>
+tum hamare BLACK BABU ho.<br><br>
+
+May your Minecraft worlds,
+Brookhaven houses,
+BMW dreams,
+aur life ke saare missions
+successful ho.
+</p>
+
+<h1>🎂🎆🎉</h1>
+
+`;
+
+}
+else{
+
+alert("Wrong code! Try Again.");
 
 }
 
 }
+
 </script>
 
 </body>
