@@ -455,6 +455,16 @@ setTimeout(()=>{
         behavior:"smooth"
     });
 },1000);
+setTimeout(() => {
+    document.getElementById("bossFight").style.display = "block";
+
+    document.getElementById("bossFight")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+    updateBars();
+}, 3000);    
 let player=150;
 let enemy=200;
 
