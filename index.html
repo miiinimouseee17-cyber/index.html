@@ -358,7 +358,85 @@ alert("Wrong code! Try Again.");
 }
 
 </style>
+#bossFight{
+background:black;
+color:white;
+min-height:100vh;
+padding:40px;
+text-align:center;
+}
 
+.fightContainer{
+max-width:1000px;
+margin:auto;
+}
+
+#demoImg{
+width:300px;
+animation:shake 3s infinite;
+}
+
+.healthSection{
+display:flex;
+justify-content:space-around;
+margin:30px;
+}
+
+.bar{
+width:250px;
+height:30px;
+background:#333;
+border:2px solid white;
+margin:10px auto;
+}
+
+#playerHP{
+height:100%;
+width:100%;
+background:lime;
+transition:1s;
+}
+
+#enemyHP{
+height:100%;
+width:100%;
+background:red;
+transition:1s;
+}
+
+.actions button{
+padding:15px;
+margin:15px;
+font-size:18px;
+cursor:pointer;
+}
+
+#battleLog{
+margin-top:30px;
+font-size:22px;
+color:#ff5555;
+min-height:50px;
+}
+
+@keyframes shake{
+
+0%{
+transform:translateX(0);
+}
+
+25%{
+transform:translateX(-10px);
+}
+
+50%{
+transform:translateX(10px);
+}
+
+100%{
+transform:translateX(0);
+}
+
+}
 <script>
 
 const cards=document.querySelectorAll(".memory-card");
@@ -377,8 +455,432 @@ setTimeout(()=>{
         behavior:"smooth"
     });
 },1000);
+let player=150;
+let enemy=200;
 
+let rageUsed=false;
+
+function startBossFight(){
+
+document.body.innerHTML=
+document.getElementById(
+"bossFight"
+).outerHTML;
+
+document.getElementById(
+"bossFight"
+).style.display=
+"block";
+
+updateBars();
+
+playRoar();
+
+}
+
+function updateBars(){
+
+document.getElementById(
+"playerHP"
+).style.width=
+(player/150*100)+"%";
+
+document.getElementById(
+"enemyHP"
+).style.width=
+(enemy/200*100)+"%";
+
+document.getElementById(
+"playerText"
+).innerHTML=
+player+"/150";
+
+document.getElementById(
+"enemyText"
+).innerHTML=
+enemy+"/200";
+
+}
+
+function nailBat(){
+
+let damage=
+Math.floor(
+Math.random()*10
+)+15;
+
+enemy-=damage;
+
+battle(
+"⚔ BLACK BABU attacked for "
++damage+" HP"
+);
+
+enemyAttack();
+
+}
+
+function diamondSword(){
+
+let damage=
+Math.floor(
+Math.random()*15
+)+20;
+
+enemy-=damage;
+
+battle(
+"⛏ Diamond Sword dealt "
++damage+" HP"
+);
+
+enemyAttack();
+
+}
+
+function gamerRage(){
+
+if(rageUsed){
+
+battle(
+"🔥 Gamer Rage already used!"
+);
+
+return;
+
+}
+
+rageUsed=true;
+
+enemy-=50;
+
+battle(
+"🔥 GAMER RAGE ACTIVATED! -50 HP"
+);
+
+enemyAttack();
+
+}
+
+function enemyAttack(){
+
+if(enemy<=0){
+
+victory();
+
+return;
+
+}
+
+let damage;
+
+if(enemy<80){
+
+damage=
+Math.floor(
+Math.random()*15
+)+15;
+
+battle(
+"☠ DEMOGORGON BERSERK!"
+);
+
+}else{
+
+damage=
+Math.floor(
+Math.random()*10
+)+8;
+
+}
+
+player-=damage;
+
+if(player<0)
+player=0;
+
+updateBars();
+
+if(player<=0){
+
+alert(
+"BLACK BABU NEVER LOSES!\nTRY AGAIN!"
+);
+
+location.reload();
+
+}
+
+}
+
+function battle(text){
+
+document.getElementById(
+"battleLog"
+).innerHTML=text;
+
+updateBars();
+
+}
+
+function playRoar(){
+
+new Audio(
+"assets/audio/demogorgon-roar.mp3"
+).play();
+
+}
+
+function victory(){
+
+new Audio(
+"assets/audio/victory.mp3"
+).play();
+
+document.body.innerHTML=`
+
+<div style="
+background:black;
+color:red;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-family:monospace;
+">
+
+<h1>
+🏆 DEMOGORGON DEFEATED
+</h1>
+
+<h2>
+BLACK BABU WINS
+</h2>
+
+<h3>
+LEVEL 13 UNLOCKED
+</h3>
+
+<br>
+
+<button
+onclick="bmwGarage()">
+
+UNLOCK BMW M4
+
+</button>
+
+</div>
+
+`;
+
+}
+
+function bmwGarage(){
+
+new Audio(
+"assets/audio/bmw.mp3"
+).play();
+
+document.body.innerHTML=`
+
+<div style="
+background:black;
+color:white;
+text-align:center;
+padding:50px;
+">
+
+<h1>
+🚗 SECRET BMW GARAGE
+</h1>
+
+<img
+src="assets/images/bmwm4.png"
+width="700">
+
+<h2>
+OWNER:
+BLACK BABU
+</h2>
+
+<h3>
+MISSION COMPLETE
+</h3>
+
+</div>
+
+`;
+
+}
+let playerHP = 100;
+let demoHP = 200;
+
+function updateBars() {
+    document.getElementById("playerHP").style.width = playerHP + "%";
+    document.getElementById("demoHP").style.width = (demoHP / 2) + "%";
+
+    document.getElementById("playerHPText").innerHTML = playerHP + "/100";
+    document.getElementById("demoHPText").innerHTML = demoHP + "/200";
+}
+
+function demoAttack() {
+    playerHP -= Math.floor(Math.random() * 15) + 5;
+
+    if(playerHP < 0) playerHP = 0;
+
+    updateBars();
+
+    if(playerHP <= 0){
+        document.getElementById("battleLog").innerHTML =
+        "💀 DEMOGORGON WON!";
+        return;
+    }
+}
+
+function nailBat() {
+    demoHP -= 15;
+    document.getElementById("battleLog").innerHTML =
+    "🪓 Nail Bat attack!";
+
+    new Audio("demogorgon-hit.mp3").play();
+
+    updateBars();
+
+    if(demoHP <= 0){
+        victory();
+        return;
+    }
+
+    demoAttack();
+}
+
+function diamondSword() {
+    demoHP -= 35;
+    document.getElementById("battleLog").innerHTML =
+    "⚔️ Diamond Sword Critical Hit!";
+
+    new Audio("sword.mp3").play();
+
+    updateBars();
+
+    if(demoHP <= 0){
+        victory();
+        return;
+    }
+
+    demoAttack();
+}
+
+function gamerRage() {
+    demoHP -= 60;
+    document.getElementById("battleLog").innerHTML =
+    "🔥 GAMER RAGE ACTIVATED!";
+
+    new Audio("thunder.mp3").play();
+
+    updateBars();
+
+    if(demoHP <= 0){
+        victory();
+        return;
+    }
+
+    demoAttack();
+}
+
+function victory() {
+    demoHP = 0;
+    updateBars();
+
+    new Audio("victory.mp3").play();
+
+    document.getElementById("battleLog").innerHTML =
+    "🏆 DEMOGORGON DEFEATED!";
+
+    setTimeout(() => {
+        alert("MISSION COMPLETE AGENT BLACK BABU!");
+    }, 1000);
+}
+
+updateBars();    
 </script>
-  
+<!-- ================= DEMOGORGON BOSS FIGHT ================= -->
+
+<section id="bossFight" style="display:none;">
+
+    <div class="fightContainer">
+
+        <h1>👹 DEMOGORGON BOSS FIGHT 👹</h1>
+
+        <img
+        id="demoImg"
+        src="demogorgon.png.jpg"
+            alt="Demogorgon Boss">
+    #demoImg{
+    width:250px;
+    height:auto;
+    animation: shake 0.5s infinite alternate;
+}
+
+@keyframes shake{
+    from{
+        transform:translateX(-5px);
+    }
+    to{
+        transform:translateX(5px);
+    }
+}
+
+        <div class="healthSection">
+
+            <div class="player">
+                ❤️ BLACK BABU
+                <div class="bar">
+                    <div id="playerHP"></div>
+                </div>
+                <span id="playerText">
+                    150/150
+                </span>
+            </div>
+
+            <div class="enemy">
+                👹 DEMOGORGON
+                <div class="bar">
+                    <div id="enemyHP"></div>
+                </div>
+                <span id="enemyText">
+                    200/200
+                </span>
+            </div>
+
+        </div>
+
+        <div class="actions">
+
+            <button onclick="nailBat()">
+                ⚔ NAIL BAT
+            </button>
+
+            <button onclick="diamondSword()">
+                ⛏ DIAMOND SWORD
+            </button>
+
+            <button onclick="gamerRage()">
+                🔥 GAMER RAGE
+            </button>
+
+        </div>
+
+        <div id="battleLog">
+            The Demogorgon appeared...
+        </div>
+
+    </div>
+
+</section>  
+    
 </body>
 </html>
