@@ -197,6 +197,188 @@ alert("Wrong code! Try Again.");
 }
 
 </script>
+<!-- ===== BLACK BABU MEMORY ARCHIVES ===== -->
 
+<section id="memoryArchive">
+    <h1 class="archive-title">⚡ BLACK BABU MEMORY ARCHIVES ⚡</h1>
+    <p class="archive-subtitle">Classified Timeline Recovered...</p>
+
+    <div class="memory-grid">
+
+        <div class="memory-card">
+            <img src="photo1.jpg" alt="Origin">
+            <div class="memory-overlay">
+                <h2>👶 THE ORIGIN STORY</h2>
+                <p>
+                    Before the world knew Agent Black Babu,
+                    there was only a small legend with unlimited potential.
+                    Mission Log: Day 1.
+                </p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="photo2.jpg" alt="Style">
+            <div class="memory-overlay">
+                <h2>🔥 STYLE UPGRADE</h2>
+                <p>
+                    Confidence level increasing.
+                    Black Babu personality unlocked.
+                </p>
+            </div>
+        </div>
+
+        <div class="memory-card">
+            <img src="photo3.jpg" alt="Royal">
+            <div class="memory-overlay">
+                <h2>👑 ROYAL AGENT MODE</h2>
+                <p>
+                    Festival mission completed.
+                    Swag level: Maximum.
+                </p>
+            </div>
+        </div>
+
+        <div class="memory-card steve-card">
+            <img src="photo4.jpg" alt="Steve Harrington">
+            <div class="memory-overlay">
+                <h2>🕶️ STEVE HARRINGTON ERA</h2>
+                <p>
+                    The sunglasses activated.
+                    Main character energy detected.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <audio id="hoverSound">
+        <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+    </audio>
+</section>
+
+<style>
+
+#memoryArchive{
+    padding:80px 20px;
+    background:#000;
+    color:#ff6600;
+    text-align:center;
+}
+
+.archive-title{
+    font-size:50px;
+    text-shadow:0 0 25px #ff6600;
+    animation:flicker 2s infinite;
+}
+
+.archive-subtitle{
+    margin-bottom:40px;
+    font-size:18px;
+}
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    max-width:1400px;
+    margin:auto;
+}
+
+.memory-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    border:2px solid #ff6600;
+    background:#111;
+    transition:0.5s;
+    animation:floatCard 4s infinite ease-in-out;
+}
+
+.memory-card:hover{
+    transform:translateY(-15px) scale(1.05);
+    box-shadow:
+        0 0 20px #ff6600,
+        0 0 40px #ff6600,
+        0 0 70px #ff6600;
+}
+
+.memory-card img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    display:block;
+}
+
+.memory-overlay{
+    padding:20px;
+}
+
+.memory-overlay h2{
+    margin-bottom:15px;
+}
+
+.steve-card:hover{
+    animation:steveGlow 0.6s infinite alternate;
+}
+
+@keyframes steveGlow{
+    from{
+        box-shadow:
+        0 0 20px cyan,
+        0 0 40px cyan;
+    }
+    to{
+        box-shadow:
+        0 0 40px white,
+        0 0 80px cyan;
+    }
+}
+
+@keyframes floatCard{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-8px);}
+    100%{transform:translateY(0px);}
+}
+
+@keyframes flicker{
+    0%,100%{opacity:1;}
+    50%{opacity:.7;}
+}
+
+@media(max-width:768px){
+
+    .archive-title{
+        font-size:32px;
+    }
+
+    .memory-card img{
+        height:300px;
+    }
+}
+
+</style>
+
+<script>
+
+const cards=document.querySelectorAll(".memory-card");
+const sound=document.getElementById("hoverSound");
+
+cards.forEach(card=>{
+    card.addEventListener("mouseenter",()=>{
+        sound.currentTime=0;
+        sound.play();
+    });
+});
+
+setTimeout(()=>{
+    document.getElementById("memoryArchive")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+},1000);
+
+</script>
+  
 </body>
 </html>
