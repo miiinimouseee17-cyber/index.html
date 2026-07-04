@@ -815,7 +815,94 @@ function victory() {
     }, 1000);
 }
 
-updateBars();    
+updateBars(); 
+    function demoAttack() {
+    playerHP -= Math.floor(Math.random() * 15) + 5;
+
+    if (playerHP < 0) playerHP = 0;
+
+    updateBars();
+
+    if (playerHP <= 0) {
+        document.getElementById("battleLog").innerHTML =
+            "💀 Black Babu was defeated by the Demogorgon!";
+        setTimeout(() => {
+            alert("GAME OVER 💀");
+        }, 500);
+    }
+}
+
+function nailBat() {
+    demoHP -= Math.floor(Math.random() * 20) + 10;
+
+    document.getElementById("battleLog").innerHTML =
+        "⚔️ Black Babu attacked with the Nail Bat!";
+
+    document.getElementById("hitSound").play();
+
+    updateBars();
+
+    if (demoHP <= 0) victory();
+    else setTimeout(demoAttack, 1000);
+}
+
+function diamondSword() {
+    demoHP -= Math.floor(Math.random() * 35) + 20;
+
+    document.getElementById("battleLog").innerHTML =
+        "🗡️ Diamond Sword critical hit!";
+
+    document.getElementById("swordSound").play();
+
+    updateBars();
+
+    if (demoHP <= 0) victory();
+    else setTimeout(demoAttack, 1000);
+}
+
+function gamerRage() {
+    demoHP -= Math.floor(Math.random() * 50) + 30;
+
+    document.getElementById("battleLog").innerHTML =
+        "🔥 GAMER RAGE ACTIVATED!";
+
+    document.getElementById("thunderSound").play();
+
+    updateBars();
+
+    if (demoHP <= 0) victory();
+    else setTimeout(demoAttack, 1000);
+}
+
+function victory() {
+    demoHP = 0;
+    updateBars();
+
+    document.getElementById("battleLog").innerHTML =
+        "🏆 DEMOGORGON DEFEATED!";
+
+    document.getElementById("victorySound").play();
+
+    setTimeout(() => {
+        document.body.innerHTML += `
+        <div style="
+            position:fixed;
+            inset:0;
+            background:black;
+            color:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+            font-family:Arial;
+        ">
+            <h1>🏆 MISSION COMPLETE 🏆</h1>
+            <h2>BLACK BABU SAVED HAWKINS</h2>
+            <h3>❤️ Family Forever ❤️</h3>
+        </div>`;
+    }, 1500);
+}
 </script>
 <!-- ================= DEMOGORGON BOSS FIGHT ================= -->
 
